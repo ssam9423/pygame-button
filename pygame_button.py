@@ -2,18 +2,22 @@
 import pygame
 
 class Button:
-    def __init__(self, name, screen, bg_color, t_color, x_pos, y_pos,
+    def __init__(self, screen, name='Button', x_pos=0, y_pos=0,
+                 bg_color=(96, 108, 56), t_color=(96, 108, 56), 
                  hover_bg_color=(96, 108, 56), hover_t_color=(96, 108, 56), 
+                 disable_bg_color=(48, 42, 42), disable_t_color=(226, 226, 226), 
                  default=0, hover=2,
                  font_name='yugothicuisemibold', font_size=25,
                  width=150, height=80, spacing_factor=10,
-                 b_radius=2, static_size=False):
+                 b_radius=2, static_size=False, clickable=True):
         self.name = name
         self.screen = screen
         self.bg_color = bg_color
         self.t_color = t_color
         self.hover_bg_color = hover_bg_color
         self.hover_t_color = hover_t_color
+        self.disable_bg_color = disable_bg_color
+        self.disable_t_color = disable_t_color
         self.default = default          # Button Color Fill
         self.hover = hover              # Button Color Fill
 
@@ -34,30 +38,28 @@ class Button:
         
         self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
         self.font = pygame.font.SysFont(self.font_name, self.font_size)
+        self.clickable = clickable
 
-    def default_draw(self):
-        pygame.draw.rect(self.screen, self.bg_color, self.rect, 
+    def button_draw(self, button_color, text_color):
+        pygame.draw.rect(self.screen, button_color, self.rect, 
                          self.default, border_radius=self.b_radius)
-        button_surf = self.font.render(self.name, 1, self.t_color)
-        text_width, text_height = button_surf.get_size()
-        x_center = self.x_pos + (self.width - text_width) / 2
-        y_center = self.y_pos + (self.height - text_height) / 2
-        self.screen.blit(button_surf, (x_center, y_center))
-
-    def hover_draw(self):
-        pygame.draw.rect(self.screen, self.hover_bg_color, self.rect, 
-                         self.hover, border_radius=self.b_radius)
-        button_surf = self.font.render(self.name, 1, self.hover_bg_color)
+        self.text_blit(text_color)
+    
+    def text_blit(self, text_color):
+        button_surf = self.font.render(self.name, 1, text_color)
         text_width, text_height = button_surf.get_size()
         x_center = self.x_pos + (self.width - text_width) / 2
         y_center = self.y_pos + (self.height - text_height) / 2
         self.screen.blit(button_surf, (x_center, y_center))
 
     def show(self, mouse_pos):
-        if self.rect.collidepoint(mouse_pos):
-            self.hover_draw()
+        if self.clickable:
+            if self.rect.collidepoint(mouse_pos):
+                self.button_draw(self.hover_bg_color, self.hover_t_color)
+            else:
+                self.button_draw(self.bg_color, self.t_color)
         else:
-            self.default_draw()
+            self.button_draw(self.disable_bg_color, self.disable_t_color)
 
     def update_screen(self, new_screen):
         self.screen = new_screen
