@@ -3,7 +3,7 @@ import pygame
 
 class Button:
     def __init__(self, screen, name='Button', x_pos=0, y_pos=0,
-                 bg_color=(96, 108, 56), t_color=(96, 108, 56), 
+                 bg_color=(96, 108, 56), t_color=(40, 54, 24), 
                  hover_bg_color=(96, 108, 56), hover_t_color=(96, 108, 56), 
                  disable_bg_color=(48, 42, 42), disable_t_color=(226, 226, 226), 
                  default=0, hover=2,
@@ -85,6 +85,19 @@ class Button:
         self.w_spacing = self.width / new_spacing
         self.h_spacing = self.height / new_spacing
 
+    def update_position(self, new_x, new_y):
+        self.x_pos = new_x
+        self.y_pos = new_y
+        self.rect = pygame.Rect(self.x_pos, self.y_pos, self.width, self.height)
+
+    def update_font_name(self, font_name):
+        self.font_name = font_name
+        self.font = pygame.font.SysFont(self.font_name, self.font_size)
+
+    def update_font_size(self, font_size):
+        self.font_size = font_size
+        self.font = pygame.font.SysFont(self.font_name, self.font_size)
+
     def get_size_offset(self):
         return (int(self.width/2), int(self.height/2))
     
@@ -93,3 +106,34 @@ class Button:
     
     def get_font_size(self):
         return self.font.size(self.name)
+    
+# pygame.init()
+# screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE)
+
+# color = (100, 50, 50)
+# button = Button('Button', screen, color, (200, 200, 200), 0, 0)
+
+# button.x_pos = 400 - button.get_size_offset()[0]
+# button.y_pos = 300 - button.get_size_offset()[1]
+# button.update_screen(screen)
+# game_on = True
+
+
+# while game_on:
+#     for event in pygame.event.get():
+#         screen.fill((232, 228, 218))
+#         # Check to Quit Game 
+#         if event.type == pygame.QUIT:
+#             game_on = False
+#         # Change screen size
+#         if event.type == pygame.VIDEORESIZE:
+#             # There's some code to add back window content here.
+#             screen = pygame.display.set_mode((event.w, event.h),
+#                                               pygame.RESIZABLE)
+#             button.x_pos = (screen.get_size()[0] / 2) - button.get_size_offset()[0]
+#             button.y_pos = (screen.get_size()[1] / 2) - button.get_size_offset()[1]
+#             button.update_screen(screen)
+#             button.auto_font_size()
+
+#     button.show(pygame.mouse.get_pos())
+#     pygame.display.update()
