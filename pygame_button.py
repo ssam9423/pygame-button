@@ -106,34 +106,3 @@ class Button:
     
     def get_font_size(self):
         return self.font.size(self.name)
-    
-# pygame.init()
-# screen = pygame.display.set_mode((800, 600), pygame.RESIZABLE)
-
-# color = (100, 50, 50)
-# button = Button('Button', screen, color, (200, 200, 200), 0, 0)
-
-# button.x_pos = 400 - button.get_size_offset()[0]
-# button.y_pos = 300 - button.get_size_offset()[1]
-# button.update_screen(screen)
-# game_on = True
-
-
-# while game_on:
-#     for event in pygame.event.get():
-#         screen.fill((232, 228, 218))
-#         # Check to Quit Game 
-#         if event.type == pygame.QUIT:
-#             game_on = False
-#         # Change screen size
-#         if event.type == pygame.VIDEORESIZE:
-#             # There's some code to add back window content here.
-#             screen = pygame.display.set_mode((event.w, event.h),
-#                                               pygame.RESIZABLE)
-#             button.x_pos = (screen.get_size()[0] / 2) - button.get_size_offset()[0]
-#             button.y_pos = (screen.get_size()[1] / 2) - button.get_size_offset()[1]
-#             button.update_screen(screen)
-#             button.auto_font_size()
-
-#     button.show(pygame.mouse.get_pos())
-#     pygame.display.update()
