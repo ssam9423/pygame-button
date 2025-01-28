@@ -39,7 +39,7 @@ The Button class has multiple functions:
 | `update_screen(screen)`                     | `pygame.surface.Surface` | this funtion takes in a `pygame.surface.Surface` object and updates screen on which the Button is displayed on. If `static_size` is `False`, the Button's `width` and `height` are updated as well. |
 | `auto_font_size()`                          |                          | this function updates the font size so that the text on the button fits within the button according to the Button's `w_spacing` and `h_spacing`
 | `update_spacing_factor(new_spacing_factor)` | `int`                    | this function takes in an integer as the new `spacing_factor` and updates the `w_spacing` and `h_spacing` |
-| `update_button_size(new_width, new_height)` | `int`, `int`             | this function takes in integers as the new `width` and `height` and updates `rect`
+| `update_button_size(new_width, new_height)` | `int`, `int`             | this function takes in integers as the new `width` and `height` and updates `rect` |
 | `update_position(new_x, new_y)`             | `int`, `int`             | this function takes in integers as the new `x_pos` and `y_pos` and updates `rect`|
 | `update_font_name(font_name)`               | `string`                 | this function takes in a string as the new `font_name` and updates the `font`|
 | `update_font_size(font_name)`               | `int`                    | this function takes in a integer as the new `font_size` and updates the `font`|
